@@ -14,3 +14,36 @@
     padding: 15px 20px;
     font-family: 'Poppins', sans-serif;
 }
+
+.mediaButtons {
+    color: rgba(18, 21, 29, 0.6);
+    font-size: 14px;
+    display: flex;
+    justify-content: space-around;
+    width: 194px;
+    margin-top: 26px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.buttonLabel {
+    margin-left: 8px; 
+}
+
+.postBottom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.postButton {
+    width: 80px;
+    height: 39px;
+    background-color: #006CFA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 16px;
+}

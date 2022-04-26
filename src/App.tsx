@@ -1,7 +1,6 @@
 import Feed from './components/feed';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { far } from '@fortawesome/free-regular-svg-icons';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fal } from  '@fortawesome/pro-light-svg-icons'
 
 import './App.css';
 
@@ -13,6 +12,6 @@ function App() {
   );
 }
 
-library.add(far, fas);
+library.add(fal);
 
 export default App;
