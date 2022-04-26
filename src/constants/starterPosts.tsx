@@ -1,5 +1,6 @@
 const STARTER_POSTS = [
     {
+        id: 0,
         user: "Nickmercs",
         timestamp: 1651011986288,
         content: "Donec ullamcorper nulla non metus auctor fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis.",
@@ -11,6 +12,7 @@ const STARTER_POSTS = [
         },
         comments: []
     },{
+        id: 1,
         user: "Nickmercs",
         timestamp: 1651011986288,
         content: "Donec ullamcorper nulla non metus auctor fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis.",
@@ -22,6 +24,7 @@ const STARTER_POSTS = [
         },
         comments: [
             {
+                id: 0,
                 title: "Title goes here",
                 subtitle: "Secondary title goes here",
                 content: "Donec ullamcorper nulla non metus auctor fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis.",
