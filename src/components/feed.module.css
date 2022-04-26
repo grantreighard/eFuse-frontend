@@ -1,0 +1,17 @@
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.feed {
+    width: 800px;
+    padding: 38px 0;
+}
+
+@media(max-width: 800px) {
+    .feed {
+        width: 100vw;
+    }
+}
