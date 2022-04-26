@@ -6,14 +6,10 @@ const PostList = () => {
     const [posts, setPosts] = useState(STARTER_POSTS);
 
     useEffect(() => {
-        let localPosts;
-        try {
-            localPosts = JSON.parse(localStorage.getItem("eFusePosts") || "{}")
-        } catch(e) {
-            console.log(e)
+        const localPosts = JSON.parse(localStorage.getItem("eFusePosts") || "{}");
+        if (localPosts.length) {
+            setPosts(STARTER_POSTS.concat(localPosts))
         }
-
-        setPosts(STARTER_POSTS.concat(localPosts))
     }, [])
 
     return (
