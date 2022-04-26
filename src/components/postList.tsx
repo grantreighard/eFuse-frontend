@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import Post from './post';
 import STARTER_POSTS from "../constants/starterPosts";
 
+import styles from './postList.module.css';
+
 const PostList = () => {
     const [posts, setPosts] = useState(STARTER_POSTS);
 
@@ -13,7 +15,7 @@ const PostList = () => {
     }, [])
 
     return (
-        <div>
+        <div className={styles.postList}>
             {posts.map(post => {
                 return <Post post={post} />
             })}

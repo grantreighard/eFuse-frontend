@@ -12,3 +12,51 @@
 .profilePic {
     border-radius: 100%;
 }
+
+.header {
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    position: relative;
+}
+
+.leftGroup {
+    display: flex;
+}
+
+.userAndTime {
+    display: flex;
+    flex-direction: column;
+    height: 60px;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 16px;
+}
+
+.user {
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    font-weight: 500;
+}
+
+.time { 
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    color: #12151D99;
+    font-size: 12px;
+}
+
+.ellipsis {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+}
+
+.content {
+    text-align: left;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    margin-top: 15px;
+    color: #12151DDE;
+}

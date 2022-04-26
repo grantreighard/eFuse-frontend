@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import profilePic from '../assets/profile-picture.jpeg';
 import convertTimestamp from '../util/time';
 
@@ -39,11 +40,17 @@ const Post: React.FC<IPost> = ({ post }: IPost) => {
     return (
         <div className={styles.post}>
             <div className={styles.header}>
-                <img src={profilePic} alt={`profile icon for ${post.user}`} className={styles.profilePic} width="60" height="60" />
-                <div>
-                    <h2>{post.user}</h2>
-                    <p>{convertTimestamp(post.timestamp)} ago</p>
+                <div className={styles.leftGroup}>
+                    <img src={profilePic} alt={`profile icon for ${post.user}`} className={styles.profilePic} width="60" height="60" />
+                    <div className={styles.userAndTime}>
+                        <h2 className={styles.user}>{post.user}</h2>
+                        <p className={styles.time}>{convertTimestamp(post.timestamp)} ago</p>
+                    </div>
                 </div>
+                <FontAwesomeIcon icon={["fas", "ellipsis"]} className={styles.ellipsis} />
+            </div>
+            <div className={styles.content}>
+                {post.content}
             </div>
         </div>
     )
