@@ -80,7 +80,9 @@ const Post: React.FC<IPost> = ({ post }: IPost) => {
                 <FontAwesomeIcon icon={["fal", "circle-plus"]} className={styles.commentRightIcon}  />
             </div>
 
-            {post.comments.map(comment => {
+            { post.comments.length && <div className={styles.commentSeparator}/> }
+
+            { post.comments.map(comment => {
                 return <Comment comment={comment} />
             })}
         </div>
