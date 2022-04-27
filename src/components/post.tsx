@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import profilePic from '../assets/profile-picture.jpeg';
 import convertTimestamp from '../util/time';
 import Comment from './comment';
-import { IPostProps, IPost } from '../types/posts';
+import { IPostProps, IPost, IComment } from '../types/posts';
 import { PostsContext } from '../contexts/postContext';
 
 import styles from './post.module.css';
@@ -14,8 +14,8 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
 
     const addComment = () => {
         if (comment) {
-            const newComment = {
-                id: posts.length,
+            const newComment: IComment = {
+                id: 0,
                 title: "Hello, world",
                 subtitle: "A new comment",
                 content: comment,
@@ -28,18 +28,21 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
     
             if (post.id < 2) {
                 const localCommentsForStarterPosts = JSON.parse(localStorage.getItem("eFuseCommentsForStarters") || '[{"id":0,"comments":[]},{"id":1,"comments":[]}]');
+                newComment.id = localCommentsForStarterPosts[post.id].comments.length;
                 localCommentsForStarterPosts[post.id].comments.push(newComment);
                 localStorage.setItem("eFuseCommentsForStarters", JSON.stringify(localCommentsForStarterPosts));
             } else {
                 const localPosts: IPost[] = JSON.parse(localStorage.getItem("eFusePosts") || "[]");
                 const correctIndex = localPosts.findIndex(postObj => postObj.id === post.id);
                 const correctPost = localPosts[correctIndex];
+                newComment.id = correctPost.comments.length;
                 correctPost.comments.push(newComment);
                 localPosts.splice(correctIndex, 1, correctPost);
                 localStorage.setItem("eFusePosts", JSON.stringify(localPosts));
             }
     
             fetchPosts();
+            setComment("");
         }
     }
 

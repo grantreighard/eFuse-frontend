@@ -13,7 +13,7 @@ const CreatePost = () => {
             const localPosts = JSON.parse(localStorage.getItem("eFusePosts") || "[]");
         
             const newPost = {
-                id: localPosts.length,
+                id: localPosts.length + 2,
                 timestamp: Date.now(),
                 content: post,
                 user: "Nickmercs",
