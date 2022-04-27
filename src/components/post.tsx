@@ -1,12 +1,48 @@
+import { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import profilePic from '../assets/profile-picture.jpeg';
 import convertTimestamp from '../util/time';
 import Comment from './comment';
-import { IPostProps } from '../types/posts';
+import { IPostProps, IPost } from '../types/posts';
+import { PostsContext } from '../contexts/postContext';
 
 import styles from './post.module.css';
 
 const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
+    const { posts, fetchPosts } = useContext(PostsContext);
+    const [comment, setComment] = useState("");
+
+    const addComment = () => {
+        if (comment) {
+            const newComment = {
+                id: posts.length,
+                title: "Hello, world",
+                subtitle: "A new comment",
+                content: comment,
+                stats: {
+                    hypes: 0,
+                    shares: 0,
+                    replies: 0
+                }
+            }
+    
+            if (post.id < 2) {
+                const localCommentsForStarterPosts = JSON.parse(localStorage.getItem("eFuseCommentsForStarters") || '[{"id":0,"comments":[]},{"id":1,"comments":[]}]');
+                localCommentsForStarterPosts[post.id].comments.push(newComment);
+                localStorage.setItem("eFuseCommentsForStarters", JSON.stringify(localCommentsForStarterPosts));
+            } else {
+                const localPosts: IPost[] = JSON.parse(localStorage.getItem("eFusePosts") || "[]");
+                const correctIndex = localPosts.findIndex(postObj => postObj.id === post.id);
+                const correctPost = localPosts[correctIndex];
+                correctPost.comments.push(newComment);
+                localPosts.splice(correctIndex, 1, correctPost);
+                localStorage.setItem("eFusePosts", JSON.stringify(localPosts));
+            }
+    
+            fetchPosts();
+        }
+    }
+
     return (
         <div className={styles.post}>
             <div className={styles.header}>
@@ -45,14 +81,14 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
             </div>
             <div className={styles.commentBar}>
                 <FontAwesomeIcon icon={["fal", "message"]} className={styles.commentLeftIcon}  />
-                <input className={styles.addComment} placeholder="Add comment" />
-                <FontAwesomeIcon icon={["fal", "circle-plus"]} className={styles.commentRightIcon}  />
+                <input className={styles.addComment} placeholder="Add comment" value={comment} onChange={e => setComment(e.target.value)} />
+                <FontAwesomeIcon icon={["fal", "circle-plus"]} className={styles.commentRightIcon} onClick={addComment}  />
             </div>
 
             { post.comments.length ? <div className={styles.commentSeparator}/> : null }
 
-            { post.comments.map(comment => {
-                return <Comment comment={comment} />
+            { post.comments.map((comment, i) => {
+                return <Comment comment={comment} key={i} />
             })}
         </div>
     )

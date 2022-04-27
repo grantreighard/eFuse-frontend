@@ -119,6 +119,7 @@
     position: absolute;
     top: 33px;
     right: 15px;
+    cursor: pointer;
 }
 
 .commentSeparator {

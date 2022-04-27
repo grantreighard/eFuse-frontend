@@ -13,8 +13,8 @@ const PostList = () => {
 
     return (
         <div className={styles.postList}>
-            {posts.map(post => {
-                return <Post post={post} />
+            {posts.map((post, i) => {
+                return <Post post={post} key={i} />
             })}
         </div>
     )

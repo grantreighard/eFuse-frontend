@@ -14,6 +14,11 @@ export interface ICommentProps {
     comment: IComment
 }
 
+export interface ILocalComment {
+    id: number,
+    comments: IComment[]
+}
+
 export interface IPost {
     id: number,
     user: string,
