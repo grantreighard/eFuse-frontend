@@ -11,9 +11,11 @@ const PostsContextProvider = ({ children }: { children: React.ReactNode }) => {
         const localCommentsForStarterPosts: ILocalComment[] = JSON.parse(localStorage.getItem("eFuseCommentsForStarters") || '[{"id":0,"comments":[]},{"id":1,"comments":[]}]');
         const localPosts: IPost[] = JSON.parse(localStorage.getItem("eFusePosts") || "[]");
         const localLikesForStarterPosts = JSON.parse(localStorage.getItem("eFuseLikesForStarters") || '[{"id":0,"isLiked":false},{"id":1,"isLiked":false}]');
+        const localLikeForSecondPostComment = JSON.parse(localStorage.getItem("eFuseLikeForSecondPostComment") || '{"isLiked":false}');
 
         const starterPosts = [];
         starterPosts.push(...STARTER_POSTS.slice());
+        starterPosts[1].comments[0].isLiked = localLikeForSecondPostComment.isLiked;
 
         const mappedPosts = starterPosts.map((post, i) => {
             const clone = Object.assign({}, post)

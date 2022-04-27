@@ -13,7 +13,8 @@ export interface IComment {
 }
 
 export interface ICommentProps {
-    comment: IComment
+    comment: IComment,
+    toggleLikeComment: (commentId: number) => void
 }
 
 export interface ILocalComment {

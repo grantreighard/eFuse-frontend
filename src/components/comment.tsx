@@ -4,7 +4,7 @@ import { ICommentProps } from '../types/posts';
 
 import styles from './comment.module.css';
 
-const Comment: React.FC<ICommentProps> = ({ comment }: ICommentProps) => {
+const Comment: React.FC<ICommentProps> = ({ comment, toggleLikeComment }: ICommentProps) => {
     return (
         <div className={styles.comment}>
             <div className={styles.header}>
@@ -34,9 +34,9 @@ const Comment: React.FC<ICommentProps> = ({ comment }: ICommentProps) => {
                     <span className={styles.statLabel}>Shares</span> 
                 </div>
                 <div className={styles.singleStat}>
-                    <FontAwesomeIcon icon={["fal", "heart"]} className={styles.statIcon}  />
-                    <span className={styles.stat}>{comment.stats.likes}</span>
-                    <span className={styles.statLabel}>Likes</span> 
+                    <FontAwesomeIcon icon={comment.isLiked ? ["fas", "heart"] : ["fal", "heart"]} className={styles.statIcon} onClick={() => toggleLikeComment(comment.id)} />
+                    <span className={styles.stat}>{comment.stats.likes + (comment.isLiked ? 1 : 0)}</span>
+                    <span className={styles.statLabel}>Like{comment.stats.likes + (comment.isLiked ? 1 : 0) !== 1 ? "s" : ""}</span> 
                 </div>
             </div>
         </div>

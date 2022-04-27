@@ -30,7 +30,7 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
     
             if (post.id < 2) {
                 const localCommentsForStarterPosts = JSON.parse(localStorage.getItem("eFuseCommentsForStarters") || '[{"id":0,"comments":[]},{"id":1,"comments":[]}]');
-                newComment.id = posts[post.id].comments.concat(localCommentsForStarterPosts[post.id].comments).length;
+                newComment.id = posts[post.id].comments.length;
                 localCommentsForStarterPosts[post.id].comments.push(newComment);
                 localStorage.setItem("eFuseCommentsForStarters", JSON.stringify(localCommentsForStarterPosts));
             } else {
@@ -51,30 +51,45 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
     const toggleLikePost = () => {
         if (post.id < 2) {
             const localLikesForStarterPosts = JSON.parse(localStorage.getItem("eFuseLikesForStarters") || '[{"id":0,"isLiked":false},{"id":1,"isLiked":false}]');
-            
-            if (localLikesForStarterPosts[post.id].isLiked) {
-                localLikesForStarterPosts[post.id].isLiked = false;
-            } else {
-                localLikesForStarterPosts[post.id].isLiked = true;
-            }
-
+            localLikesForStarterPosts[post.id].isLiked = !localLikesForStarterPosts[post.id].isLiked;
             localStorage.setItem("eFuseLikesForStarters", JSON.stringify(localLikesForStarterPosts));
-            fetchPosts();
         } else {
             const localPosts: IPost[] = JSON.parse(localStorage.getItem("eFusePosts") || "[]");
             const correctIndex = localPosts.findIndex(postObj => postObj.id === post.id);
             const correctPost = localPosts[correctIndex];
-            
-            if (correctPost.isLiked) {
-                correctPost.isLiked = false;
-            } else {
-                correctPost.isLiked = true;
-            }
+            correctPost.isLiked = !correctPost.isLiked;
+            localPosts.splice(correctIndex, 1, correctPost);
+            localStorage.setItem("eFusePosts", JSON.stringify(localPosts));    
+        }
 
+        fetchPosts();
+    }
+
+    const toggleLikeComment = (commentId: number) => {
+        if (post.id < 2) {
+            if (post.id === 1 && commentId === 0) {
+                const localLikeForSecondPostComment = JSON.parse(localStorage.getItem("eFuseLikeForSecondPostComment") || '{"isLiked":false}');
+                localLikeForSecondPostComment.isLiked = !localLikeForSecondPostComment.isLiked;
+                localStorage.setItem("eFuseLikeForSecondPostComment", JSON.stringify(localLikeForSecondPostComment));
+            } else if (post.id === 1) {
+                const localCommentsForStarterPosts = JSON.parse(localStorage.getItem("eFuseCommentsForStarters") || '[{"id":0,"comments":[]},{"id":1,"comments":[]}]');
+                localCommentsForStarterPosts[post.id].comments[commentId-1].isLiked = !localCommentsForStarterPosts[post.id].comments[commentId-1].isLiked
+                localStorage.setItem("eFuseCommentsForStarters", JSON.stringify(localCommentsForStarterPosts));
+            } else {
+                const localCommentsForStarterPosts = JSON.parse(localStorage.getItem("eFuseCommentsForStarters") || '[{"id":0,"comments":[]},{"id":1,"comments":[]}]');
+                localCommentsForStarterPosts[post.id].comments[commentId].isLiked = !localCommentsForStarterPosts[post.id].comments[commentId].isLiked
+                localStorage.setItem("eFuseCommentsForStarters", JSON.stringify(localCommentsForStarterPosts));
+            }
+        } else {
+            const localPosts: IPost[] = JSON.parse(localStorage.getItem("eFusePosts") || "[]");
+            const correctIndex = localPosts.findIndex(postObj => postObj.id === post.id);
+            const correctPost = localPosts[correctIndex];
+            correctPost.comments[commentId].isLiked = !correctPost.comments[commentId].isLiked;
             localPosts.splice(correctIndex, 1, correctPost);
             localStorage.setItem("eFusePosts", JSON.stringify(localPosts));
-            fetchPosts();
         }
+
+        fetchPosts();
     }
 
     return (
@@ -127,7 +142,7 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
             { post.comments.length ? <div className={styles.commentSeparator}/> : null }
 
             { post.comments.map((comment, i) => {
-                return <Comment comment={comment} key={i} />
+                return <Comment comment={comment} toggleLikeComment={toggleLikeComment} key={i} />
             })}
         </div>
     )
