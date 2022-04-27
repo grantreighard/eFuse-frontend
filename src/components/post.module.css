@@ -127,3 +127,13 @@
     height: 0;
     margin: 16px auto;
 }
+
+@media(max-width: 800px) {
+    .commentBar input {
+        width: 85vw;
+    }
+
+    .commentSeparator {
+        width: 85vw;
+    }
+}

@@ -50,3 +50,9 @@
     font-weight: 600;
     font-size: 12px;
 }
+
+@media(max-width: 800px) {
+    .postInput {
+        width: 87.5vw;
+    }
+}
