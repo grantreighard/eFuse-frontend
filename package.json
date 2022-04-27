@@ -16,9 +16,11 @@
     "@types/node": "^16.11.30",
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.0",
+    "jest": "^27.4.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.1",
+    "ts-jest": "^27.1.4",
     "typescript": "^4.6.3",
     "web-vitals": "^2.1.4"
   },
@@ -26,6 +28,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:watch": "jest --watch",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -45,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.16.7"
   }
 }
