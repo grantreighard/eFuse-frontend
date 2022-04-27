@@ -14,7 +14,6 @@ const PostsContextProvider = ({ children }: { children: React.ReactNode }) => {
         const starterPosts: IPost[] = STARTER_POSTS.map((post, i) => {
             const correctObj = localCommentsForStarterPosts.filter(commentObj => commentObj.id === i)[0];
             post.comments = [...correctObj.comments];
-            console.log(post)
             return post;
         })
 
