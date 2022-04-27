@@ -12,8 +12,8 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
     const { posts, fetchPosts } = useContext(PostsContext);
     const [comment, setComment] = useState("");
 
-    const addComment = () => {
-        if (comment) {
+    const addComment = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (comment && event.key === "Enter") {
             const newComment: IComment = {
                 id: 0,
                 title: "Hello, world",
@@ -135,8 +135,8 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
             </div>
             <div className={styles.commentBar}>
                 <FontAwesomeIcon icon={["fal", "message"]} className={styles.commentLeftIcon}  />
-                <input className={styles.addComment} placeholder="Add comment" value={comment} onChange={e => setComment(e.target.value)} />
-                <FontAwesomeIcon icon={["fal", "circle-plus"]} className={styles.commentRightIcon} onClick={addComment}  />
+                <input className={styles.addComment} placeholder="Add comment" value={comment} onChange={e => setComment(e.target.value)} onKeyDown={e => addComment(e)} />
+                <FontAwesomeIcon icon={["fal", "circle-plus"]} className={styles.commentRightIcon} />
             </div>
 
             { post.comments.length ? <div className={styles.commentSeparator}/> : null }
