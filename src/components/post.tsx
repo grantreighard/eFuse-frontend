@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import profilePic from '../assets/profile-picture.jpeg';
 import convertTimestamp from '../util/time';
+import Comment from './comment';
 
 import styles from './post.module.css';
 
@@ -78,6 +79,10 @@ const Post: React.FC<IPost> = ({ post }: IPost) => {
                 <input className={styles.addComment} placeholder="Add comment" />
                 <FontAwesomeIcon icon={["fal", "circle-plus"]} className={styles.commentRightIcon}  />
             </div>
+
+            {post.comments.map(comment => {
+                return <Comment comment={comment} />
+            })}
         </div>
     )
 }
