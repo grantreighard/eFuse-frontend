@@ -1,10 +1,38 @@
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import styles from './createPost.module.css';
 
 const CreatePost = () => {
+    const [post, setPost] = useState("");
+
+    const createPost = () => {
+        if (post) {
+            const localPosts = JSON.parse(localStorage.getItem("eFusePosts") || "[]");
+        
+            const newPost = {
+                id: localPosts.length,
+                timestamp: Date.now(),
+                content: post,
+                user: "Nickmercs",
+                stats: {
+                    hypes: 0,
+                    comments: 0,
+                    shares: 0,
+                    views: 0
+                },
+                comments: []
+            }
+
+            localPosts.push(newPost);
+
+            localStorage.setItem("eFusePosts", JSON.stringify(localPosts));
+        }
+    }
+
     return (
         <div className={styles.createPost}>
-            <input placeholder="What's on your mind?" className={styles.postInput} />
+            <input placeholder="What's on your mind?" className={styles.postInput} value={post} onChange={e => setPost(e.target.value)} />
             <div className={styles.postBottom}>
                 <div className={styles.mediaButtons}>
                     <div>
@@ -16,7 +44,7 @@ const CreatePost = () => {
                         <span className={styles.buttonLabel}>Go Live</span>
                     </div>
                 </div>
-                <div className={styles.postButton}>Post</div>
+                <div className={styles.postButton} onClick={createPost}>Post</div>
             </div>
         </div>
     )

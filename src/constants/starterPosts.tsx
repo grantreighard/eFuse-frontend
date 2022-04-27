@@ -1,4 +1,30 @@
-const STARTER_POSTS = [
+interface IComment {
+    id: number,
+    title: string,
+    subtitle: string,
+    content: string,
+    stats: {
+        hypes: number,
+        shares: number,
+        replies: number
+    }
+}
+
+interface IPost {
+    id: number,
+    user: string,
+    timestamp: number,
+    content: string,
+    stats: {
+        hypes: number,
+        comments: number,
+        shares: number,
+        views: number,
+    },
+    comments: IComment[]
+}
+
+const STARTER_POSTS: IPost[] = [
     {
         id: 0,
         user: "Nickmercs",
