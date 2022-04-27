@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { PostsContext } from '../contexts/postContext';
 
 import styles from './createPost.module.css';
 
 const CreatePost = () => {
     const [post, setPost] = useState("");
+    const { fetchPosts } = useContext(PostsContext);
 
     const createPost = () => {
         if (post) {
@@ -27,6 +29,9 @@ const CreatePost = () => {
             localPosts.push(newPost);
 
             localStorage.setItem("eFusePosts", JSON.stringify(localPosts));
+
+            fetchPosts();
+            setPost("");
         }
     }
 
