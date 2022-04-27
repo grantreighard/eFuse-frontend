@@ -2,42 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import profilePic from '../assets/profile-picture.jpeg';
 import convertTimestamp from '../util/time';
 import Comment from './comment';
+import { IPostProps } from '../types/posts';
 
 import styles from './post.module.css';
 
-interface IPostStats {
-    hypes: number,
-    comments: number,
-    shares: number,
-    views: number,
-}
-
-interface ICommentStats {
-    hypes: number,
-    shares: number,
-    replies: number
-}
-
-interface IComment {
-    id: number,
-    title: string,
-    subtitle: string,
-    content: string,
-    stats: ICommentStats
-}
-
-interface IPost {
-    post: {
-        id: number,
-        user: string,
-        timestamp: number,
-        content: string,
-        stats: IPostStats,
-        comments: IComment[]
-    }
-}
-
-const Post: React.FC<IPost> = ({ post }: IPost) => {
+const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
     return (
         <div className={styles.post}>
             <div className={styles.header}>

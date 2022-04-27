@@ -1,25 +1,10 @@
 import profilePic from '../assets/profile-picture.jpeg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ICommentProps } from '../types/posts';
 
 import styles from './comment.module.css';
 
-interface ICommentStats {
-    hypes: number,
-    shares: number,
-    replies: number
-}
-
-interface IComment {
-    comment: {
-        id: number,
-        title: string,
-        subtitle: string,
-        content: string,
-        stats: ICommentStats
-    }
-}
-
-const Comment: React.FC<IComment> = ({ comment }: IComment) => {
+const Comment: React.FC<ICommentProps> = ({ comment }: ICommentProps) => {
     return (
         <div className={styles.comment}>
             <div className={styles.header}>
