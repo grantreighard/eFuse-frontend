@@ -24,7 +24,8 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
                     shares: 0,
                     replies: 0,
                     likes: 0
-                }
+                },
+                isLiked: false
             }
     
             if (post.id < 2) {

@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import constants  from "../constants/starterPosts";
+import STARTER_POSTS  from "../constants/starterPosts";
 import { IPost, ILocalComment, IPostsContext } from '../types/posts';
 
 export const PostsContext = createContext<IPostsContext>({posts: [], fetchPosts: () => {}});
@@ -8,23 +8,22 @@ const PostsContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [posts, setPosts] = useState<IPost[]>([]);
     
     const fetchPosts = () => {
-        const { STARTER_POSTS } = constants;
         const localCommentsForStarterPosts: ILocalComment[] = JSON.parse(localStorage.getItem("eFuseCommentsForStarters") || '[{"id":0,"comments":[]},{"id":1,"comments":[]}]');
         const localPosts: IPost[] = JSON.parse(localStorage.getItem("eFusePosts") || "[]");
 
         const starterPosts = [];
-        starterPosts.push(...STARTER_POSTS);
+        starterPosts.push(...STARTER_POSTS.slice());
 
-        STARTER_POSTS.forEach((post, i) => {
-            post.comments = [];
-            post.comments = STARTER_POSTS[i].comments.concat(localCommentsForStarterPosts[i].comments);
-            return post;
+        const mappedPosts = starterPosts.map((post, i) => {
+            const clone = Object.assign({}, post)
+            clone.comments = STARTER_POSTS[i].comments.concat(localCommentsForStarterPosts[i].comments);
+            return clone;
         })
 
         if (localPosts.length) {
-            setPosts(starterPosts.concat(localPosts))
+            setPosts(mappedPosts.concat(localPosts))
         } else {
-            setPosts(starterPosts);
+            setPosts(mappedPosts);
         }
     }
 

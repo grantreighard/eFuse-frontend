@@ -24,6 +24,7 @@ const CreatePost = () => {
                     views: 0,
                     likes: 0
                 },
+                isLiked: false,
                 comments: []
             }
 

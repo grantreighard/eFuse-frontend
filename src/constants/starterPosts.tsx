@@ -1,6 +1,6 @@
 import { IPost } from "../types/posts";
 
-const posts: IPost[] = [
+const STARTER_POSTS: IPost[] = [
     {
         id: 0,
         user: "Nickmercs",
@@ -13,6 +13,7 @@ const posts: IPost[] = [
             views: 100,
             likes: 50
         },
+        isLiked: false,
         comments: []
     },{
         id: 1,
@@ -26,6 +27,7 @@ const posts: IPost[] = [
             views: 100,
             likes: 50
         },
+        isLiked: false,
         comments: [
             {
                 id: 0,
@@ -37,10 +39,11 @@ const posts: IPost[] = [
                     replies: 25,
                     shares: 12,
                     likes: 50
-                }
+                },
+                isLiked: false,
             }
         ]
     }
 ]
 
-export default Object.freeze({ STARTER_POSTS: posts })
+export default STARTER_POSTS;

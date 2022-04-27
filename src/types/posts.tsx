@@ -8,7 +8,8 @@ export interface IComment {
         shares: number,
         replies: number,
         likes: number
-    }
+    },
+    isLiked: boolean
 }
 
 export interface ICommentProps {
@@ -32,6 +33,7 @@ export interface IPost {
         views: number,
         likes: number
     },
+    isLiked: boolean,
     comments: IComment[]
 }
 
