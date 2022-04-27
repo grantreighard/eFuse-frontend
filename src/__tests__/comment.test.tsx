@@ -1,23 +1,53 @@
-import { render, screen, waitFor } from "@testing-library/react";
-
+import { screen, render, fireEvent } from '@testing-library/react';
 import Comment from "../components/comment";
 
 const comment = {
     id: 0,
-    content: "Test",
-    title: "Test",
-    subtitle: "Test",
+    content: "Content",
+    title: "Title",
+    subtitle: "Subtitle",
     stats: {
         hypes: 0,
-        shares: 0,
-        replies: 0,
-        likes: 0
+        shares: 1,
+        replies: 2,
+        likes: 3
     }, 
     isLiked: false
 }
 
 describe("<Comment />", () => {
-    test('two plus two is four', () => {
-        expect(2 + 2).toBe(4);
-      });
+    test('it should render the content', () => {
+        render(<Comment comment={comment} toggleLikeComment={() => {}} />)
+        expect(screen.getByText(/Content/)).toBeTruthy();
+    });
+
+    test('it should render the title', () => {
+        render(<Comment comment={comment} toggleLikeComment={() => {}} />)
+        expect(screen.getByText(/Title/)).toBeTruthy();
+    });
+
+    test('it should render the subtitle', () => {
+        render(<Comment comment={comment} toggleLikeComment={() => {}} />)
+        expect(screen.getByText(/Subtitle/)).toBeTruthy();
+    });
+
+    test('it should render the hypes', () => {
+        render(<Comment comment={comment} toggleLikeComment={() => {}} />)
+        expect(screen.getByText(/0/)).toBeTruthy();
+    });
+
+    test('it should render the shares', () => {
+        render(<Comment comment={comment} toggleLikeComment={() => {}} />)
+        expect(screen.getByText(/1/)).toBeTruthy();
+    });
+
+    test('it should render the replies', () => {
+        render(<Comment comment={comment} toggleLikeComment={() => {}} />)
+        expect(screen.getByText(/2/)).toBeTruthy();
+    });
+
+    test('it should render the likes', () => {
+        render(<Comment comment={comment} toggleLikeComment={() => {}} />)
+        expect(screen.getByText(/3/)).toBeTruthy();
+    });
 });
