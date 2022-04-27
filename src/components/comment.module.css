@@ -40,7 +40,7 @@
 
 .statBar {
     display: flex;
-    width: 250px;
+    width: 320px;
     justify-content: space-between;
     margin-top: 20px;
 }

@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import STARTER_POSTS from "../constants/starterPosts";
+import constants  from "../constants/starterPosts";
 import { IPost, ILocalComment, IPostsContext } from '../types/posts';
 
 export const PostsContext = createContext<IPostsContext>({posts: [], fetchPosts: () => {}});
@@ -8,12 +8,16 @@ const PostsContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [posts, setPosts] = useState<IPost[]>([]);
     
     const fetchPosts = () => {
+        const { STARTER_POSTS } = constants;
         const localCommentsForStarterPosts: ILocalComment[] = JSON.parse(localStorage.getItem("eFuseCommentsForStarters") || '[{"id":0,"comments":[]},{"id":1,"comments":[]}]');
         const localPosts: IPost[] = JSON.parse(localStorage.getItem("eFusePosts") || "[]");
-        
-        const starterPosts: IPost[] = STARTER_POSTS.map((post, i) => {
-            const correctObj = localCommentsForStarterPosts.filter(commentObj => commentObj.id === i)[0];
-            post.comments = [...correctObj.comments];
+
+        const starterPosts = [];
+        starterPosts.push(...STARTER_POSTS);
+
+        STARTER_POSTS.forEach((post, i) => {
+            post.comments = [];
+            post.comments = STARTER_POSTS[i].comments.concat(localCommentsForStarterPosts[i].comments);
             return post;
         })
 

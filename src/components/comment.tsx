@@ -33,6 +33,11 @@ const Comment: React.FC<ICommentProps> = ({ comment }: ICommentProps) => {
                     <span className={styles.stat}>{comment.stats.shares}</span>
                     <span className={styles.statLabel}>Shares</span> 
                 </div>
+                <div className={styles.singleStat}>
+                    <FontAwesomeIcon icon={["fal", "heart"]} className={styles.statIcon}  />
+                    <span className={styles.stat}>{comment.stats.likes}</span>
+                    <span className={styles.statLabel}>Likes</span> 
+                </div>
             </div>
         </div>
     )

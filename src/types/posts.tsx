@@ -6,7 +6,8 @@ export interface IComment {
     stats: {
         hypes: number,
         shares: number,
-        replies: number
+        replies: number,
+        likes: number
     }
 }
 
@@ -29,6 +30,7 @@ export interface IPost {
         comments: number,
         shares: number,
         views: number,
+        likes: number
     },
     comments: IComment[]
 }

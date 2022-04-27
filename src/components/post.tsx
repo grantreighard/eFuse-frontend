@@ -22,13 +22,14 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
                 stats: {
                     hypes: 0,
                     shares: 0,
-                    replies: 0
+                    replies: 0,
+                    likes: 0
                 }
             }
     
             if (post.id < 2) {
                 const localCommentsForStarterPosts = JSON.parse(localStorage.getItem("eFuseCommentsForStarters") || '[{"id":0,"comments":[]},{"id":1,"comments":[]}]');
-                newComment.id = localCommentsForStarterPosts[post.id].comments.length;
+                newComment.id = posts[post.id].comments.concat(localCommentsForStarterPosts[post.id].comments).length;
                 localCommentsForStarterPosts[post.id].comments.push(newComment);
                 localStorage.setItem("eFuseCommentsForStarters", JSON.stringify(localCommentsForStarterPosts));
             } else {
@@ -80,6 +81,11 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
                 <div className={styles.singleStat}>
                     <span className={styles.stat}>{post.stats.views}</span>
                     <span className={styles.statLabel}>Views</span> 
+                </div>
+                <div className={styles.singleStat}>
+                    <FontAwesomeIcon icon={["fal", "heart"]} className={styles.statIcon}  />
+                    <span className={styles.stat}>{post.stats.likes}</span>
+                    <span className={styles.statLabel}>Likes</span> 
                 </div>
             </div>
             <div className={styles.commentBar}>

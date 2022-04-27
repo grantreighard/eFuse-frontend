@@ -21,7 +21,8 @@ const CreatePost = () => {
                     hypes: 0,
                     comments: 0,
                     shares: 0,
-                    views: 0
+                    views: 0,
+                    likes: 0
                 },
                 comments: []
             }
