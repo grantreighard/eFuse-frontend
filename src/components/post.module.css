@@ -60,3 +60,63 @@
     margin-top: 15px;
     color: #12151DDE;
 }
+
+.statBar {
+    display: flex;
+    width: 350px;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.stat {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #12151D;
+    margin-left: 10px;
+}
+
+.statLabel {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    color: #707276;
+    margin-left: 5px;
+}
+
+.statIcon {
+    color: #707276;
+}
+
+.commentBar {
+    position: relative;
+}
+
+.addComment {
+    width: 740px;
+    height: 40px;
+    margin-top: 20px;
+    background-color: #F1F4F8;
+    border-radius: 100px;
+    border: none;
+    padding: 10px 45px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #707276;
+}
+
+.commentLeftIcon, .commentRightIcon {
+    color: #707276;
+}
+
+.commentLeftIcon {
+    position: absolute;
+    top: 33px;
+    left: 15px;
+}
+
+.commentRightIcon {
+    position: absolute;
+    top: 33px;
+    right: 15px;
+}
