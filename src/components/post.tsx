@@ -48,6 +48,35 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
         }
     }
 
+    const toggleLikePost = () => {
+        if (post.id < 2) {
+            const localLikesForStarterPosts = JSON.parse(localStorage.getItem("eFuseLikesForStarters") || '[{"id":0,"isLiked":false},{"id":1,"isLiked":false}]');
+            
+            if (localLikesForStarterPosts[post.id].isLiked) {
+                localLikesForStarterPosts[post.id].isLiked = false;
+            } else {
+                localLikesForStarterPosts[post.id].isLiked = true;
+            }
+
+            localStorage.setItem("eFuseLikesForStarters", JSON.stringify(localLikesForStarterPosts));
+            fetchPosts();
+        } else {
+            const localPosts: IPost[] = JSON.parse(localStorage.getItem("eFusePosts") || "[]");
+            const correctIndex = localPosts.findIndex(postObj => postObj.id === post.id);
+            const correctPost = localPosts[correctIndex];
+            
+            if (correctPost.isLiked) {
+                correctPost.isLiked = false;
+            } else {
+                correctPost.isLiked = true;
+            }
+
+            localPosts.splice(correctIndex, 1, correctPost);
+            localStorage.setItem("eFusePosts", JSON.stringify(localPosts));
+            fetchPosts();
+        }
+    }
+
     return (
         <div className={styles.post}>
             <div className={styles.header}>
@@ -71,7 +100,7 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
                 </div>
                 <div className={styles.singleStat}>
                     <FontAwesomeIcon icon={["fal", "message"]} className={styles.statIcon}  />
-                    <span className={styles.stat}>{post.stats.comments}</span>
+                    <span className={styles.stat}>{post.stats.comments || post.comments.length}</span>
                     <span className={styles.statLabel}>Comments</span> 
                 </div>
                 <div className={styles.singleStat}>
@@ -84,9 +113,9 @@ const Post: React.FC<IPostProps> = ({ post }: IPostProps) => {
                     <span className={styles.statLabel}>Views</span> 
                 </div>
                 <div className={styles.singleStat}>
-                    <FontAwesomeIcon icon={["fal", "heart"]} className={styles.statIcon}  />
-                    <span className={styles.stat}>{post.stats.likes}</span>
-                    <span className={styles.statLabel}>Likes</span> 
+                    <FontAwesomeIcon icon={post.isLiked ? ["fas", "heart"] : ["fal", "heart"]} className={styles.statIcon} onClick={toggleLikePost} />
+                    <span className={styles.stat}>{post.stats.likes + (post.isLiked ? 1 : 0)}</span>
+                    <span className={styles.statLabel}>Like{post.stats.likes + (post.isLiked ? 1 : 0) !== 1 ? "s" : ""}</span> 
                 </div>
             </div>
             <div className={styles.commentBar}>
