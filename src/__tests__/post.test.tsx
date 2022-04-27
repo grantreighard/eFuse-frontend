@@ -14,21 +14,7 @@ const post = {
         likes: 4
     },
     isLiked: false,
-    comments: [
-        {
-            id: 0,
-            content: "Content",
-            title: "Title",
-            subtitle: "Subtitle",
-            stats: {
-                hypes: 5,
-                shares: 6,
-                replies: 7,
-                likes: 8
-            }, 
-            isLiked: false
-        }
-    ]
+    comments: []
 }
 
 describe("<Post />", () => {
@@ -67,18 +53,28 @@ describe("<Post />", () => {
         expect(screen.getByText(/2/)).toBeTruthy();
     });
 
+    test('it should render the word Shares', () => {
+        render(<Post post={post} />);
+        expect(screen.getByText(/Shares/)).toBeTruthy();
+    });
+
     test('it should render the views', () => {
         render(<Post post={post} />);
         expect(screen.getByText(/3/)).toBeTruthy();
     });
 
-    test('it should render the word View', () => {
+    test('it should render the word Views', () => {
         render(<Post post={post} />);
-        expect(screen.getByText(/View/)).toBeTruthy();
+        expect(screen.getByText(/Views/)).toBeTruthy();
     });
 
     test('it should render the likes', () => {
         render(<Post post={post} />);
         expect(screen.getByText(/4/)).toBeTruthy();
+    });
+
+    test('it should render the word Likes', () => {
+        render(<Post post={post} />);
+        expect(screen.getByText(/Likes/)).toBeTruthy();
     });
 })

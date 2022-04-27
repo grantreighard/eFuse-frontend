@@ -36,9 +36,19 @@ describe("<Comment />", () => {
         expect(screen.getByText(/0/)).toBeTruthy();
     });
 
+    test('it should render the word Hypes', () => {
+        render(<Comment comment={comment} toggleLikeComment={() => {}} />)
+        expect(screen.getByText(/Hypes/)).toBeTruthy();
+    });
+
     test('it should render the shares', () => {
         render(<Comment comment={comment} toggleLikeComment={() => {}} />)
         expect(screen.getByText(/1/)).toBeTruthy();
+    });
+
+    test('it should render the word Share', () => {
+        render(<Comment comment={comment} toggleLikeComment={() => {}} />)
+        expect(screen.getByText(/Share/)).toBeTruthy();
     });
 
     test('it should render the replies', () => {
@@ -46,8 +56,18 @@ describe("<Comment />", () => {
         expect(screen.getByText(/2/)).toBeTruthy();
     });
 
+    test('it should render the word Replies', () => {
+        render(<Comment comment={comment} toggleLikeComment={() => {}} />)
+        expect(screen.getByText(/Replies/)).toBeTruthy();
+    });
+
     test('it should render the likes', () => {
         render(<Comment comment={comment} toggleLikeComment={() => {}} />)
         expect(screen.getByText(/3/)).toBeTruthy();
+    });
+
+    test('it should render the word Likes', () => {
+        render(<Comment comment={comment} toggleLikeComment={() => {}} />)
+        expect(screen.getByText(/Likes/)).toBeTruthy();
     });
 });
