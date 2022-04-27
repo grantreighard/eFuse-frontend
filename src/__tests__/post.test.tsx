@@ -38,6 +38,11 @@ describe("<Post />", () => {
         expect(screen.getByText(/0/)).toBeTruthy();
     });
 
+    test('it should render the word Hypes', () => {
+        render(<Post post={post} />);
+        expect(screen.getByText(/Hypes/)).toBeTruthy();
+    });
+
     test('it should render the comments', () => {
         render(<Post post={post} />);
         expect(screen.getByText(/1/)).toBeTruthy();
