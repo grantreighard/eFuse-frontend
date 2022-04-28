@@ -61,6 +61,10 @@
     color: #12151DDE;
 }
 
+.singleStat {
+    margin-left: 10px;
+}
+
 .statBar {
     display: flex;
     width: 430px;
