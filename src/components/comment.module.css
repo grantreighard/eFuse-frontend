@@ -45,6 +45,10 @@
     margin-top: 20px;
 }
 
+.statIcon {
+    color: #707276;
+}
+
 .stat {
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
