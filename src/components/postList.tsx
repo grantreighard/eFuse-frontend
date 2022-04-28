@@ -9,7 +9,7 @@ const PostList = () => {
 
     useEffect(() => {
         fetchPosts();
-    }, [])
+    })
 
     return (
         <div className={styles.postList}>
